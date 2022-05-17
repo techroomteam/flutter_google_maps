@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1055374388466",
+    "project_id": "casa-785c0",
+    "storage_bucket": "casa-785c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055374388466:android:b91d4fe69547fe8bbef46b",
+        "android_client_info": {
+          "package_name": "com.example.freelancer_tracking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055374388466-p55a47u4ogksmtpk5irt6qb80ik9njen.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwaOw7iuGM9pDQ3J22W0n7y3fUC1tW7hY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055374388466-p55a47u4ogksmtpk5irt6qb80ik9njen.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
