@@ -16,24 +16,16 @@ class RenterAppWithFirebase extends StatefulWidget {
 class _RenterAppWithFirebaseState extends State<RenterAppWithFirebase> {
   double zoom = 15;
   PolylinePoints polylinePoints = PolylinePoints();
-  late var isLocationOnPath = false;
   late int heading = 90;
   late RenterViewModel renterViewModel;
   @override
   Widget build(BuildContext context) {
     renterViewModel = Provider.of<RenterViewModel>(context, listen: false);
+
     renterViewModel.freelancerOnRoute =
         Provider.of<FreelancerOnRoute>(context, listen: true);
-    debugPrint('Renter Page Rebuild');
-    if (renterViewModel.previousLoc.currentLocation.latitude !=
-            renterViewModel.freelancerOnRoute.currentLocation.latitude &&
-        renterViewModel.previousLoc.currentLocation.longitude !=
-            renterViewModel.freelancerOnRoute.currentLocation.longitude) {
-      renterViewModel.previousLoc = renterViewModel.freelancerOnRoute;
-      WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
-        renterViewModel.start();
-      });
-    }
+    renterViewModel.onNewLocationData();
+    // debugPrint('Renter Page Rebuild');
 
     return Scaffold(
       appBar: AppBar(
@@ -55,10 +47,13 @@ class _RenterAppWithFirebaseState extends State<RenterAppWithFirebase> {
               duration: const Duration(milliseconds: 2000),
               onStopover: model.onStopover,
               onMarkerAnimationListener: (marker) {
-                if (isLocationOnPath) {
-                  debugPrint('onMarkerAnimation.....');
-                  model.polylineCoordinate[0] = marker.position;
-                  model.updatePage();
+                if (model.isLocationOnPath) {
+                  debugPrint('onMarkerAnimation.....Renter...');
+                  model.polylineCoordinate[0] = LatLng(
+                      marker.position.latitude, marker.position.longitude);
+                  WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+                    model.updatePage();
+                  });
                 }
               },
               markers: <Marker>{

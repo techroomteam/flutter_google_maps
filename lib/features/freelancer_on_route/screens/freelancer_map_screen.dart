@@ -102,10 +102,12 @@ class _FreelancerAppWithFirebaseState extends State<FreelancerAppWithFirebase>
                 onStopover: model.onStopover,
                 onMarkerAnimationListener: (marker) {
                   if (model.isLocationOnPath) {
-                    debugPrint('onMarkerAnimation.....');
+                    debugPrint('onMarkerAnimation.....Freelancer...');
                     model.polylineCoordinate[0] = LatLng(
                         marker.position.latitude, marker.position.longitude);
-                    model.updatePage();
+                    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+                      model.updatePage();
+                    });
                   }
                 },
                 markers: <Marker>{
@@ -134,7 +136,7 @@ class _FreelancerAppWithFirebaseState extends State<FreelancerAppWithFirebase>
                   padding: const EdgeInsets.only(left: 70.0),
                   child: ElevatedButton(
                       onPressed: () {
-                        // changeLocation();
+                        model.changeLocation();
                       },
                       child: const Text('Move')),
                 ),

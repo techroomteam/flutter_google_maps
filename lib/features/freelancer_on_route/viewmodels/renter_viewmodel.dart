@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_animarker/core/ripple_marker.dart';
 import 'package:freelancer_tracking/features/freelancer_on_route/model/mylatlng.dart';
+import 'package:freelancer_tracking/main.dart';
 import 'package:freelancer_tracking/widgets/base_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../../config/string.dart';
@@ -9,13 +10,13 @@ import '../model/freelancer_route.dart';
 import 'package:maps_toolkit/maps_toolkit.dart' as mp;
 
 class RenterViewModel extends BaseModel {
-  late FreelancerOnRoute previousLoc =
-      FreelancerOnRoute(currentLocation: MyLatLng(33.6342057, 73.0299553));
+  late MyLatLng previousLoc = MyLatLng(33.6342057, 73.0299553);
   String statusRenter = 'renter App';
   late FreelancerOnRoute freelancerOnRoute;
   late LatLng currentPosition;
   late MyLatLng currentLocation;
   bool centerPolylineCheck = true;
+  late var isLocationOnPath = false;
   final Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
   var polylineCoordinate = <LatLng>[];
   var mpPolylineCoordinate = <mp.LatLng>[];
@@ -23,16 +24,28 @@ class RenterViewModel extends BaseModel {
   late GoogleMapController mapController;
   final Completer<GoogleMapController> controller = Completer();
   var markerIndex = 0;
-  void start() {
+
+  onNewLocationData() {
+    if (previousLoc.latitude != freelancerOnRoute.currentLocation.latitude &&
+        previousLoc.longitude != freelancerOnRoute.currentLocation.longitude) {
+      previousLoc = freelancerOnRoute.currentLocation;
+      WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
+        checkNewLocationOnPath();
+      });
+    }
+  }
+
+  void checkNewLocationOnPath() {
     currentPosition = LatLng(freelancerOnRoute.currentLocation.latitude,
         freelancerOnRoute.currentLocation.longitude);
     currentLocation =
         MyLatLng(currentPosition.latitude, currentPosition.longitude);
     if (freelancerOnRoute.isroutechanged!) {
-      debugPrint('Condition True....');
+      isLocationOnPath = false;
       updateMarker(currentLocation);
       centerPolylineCheck ? centerPolyline() : showPolyLine();
     } else {
+      isLocationOnPath = true;
       markerIndex = isOnSegment(currentLocation);
       if (markerIndex > 0) {
         final polylineCoordinates = MyLatLng(
@@ -42,6 +55,7 @@ class RenterViewModel extends BaseModel {
         updateMarker(currentLocation);
       }
     }
+    notifyListeners();
   }
 
   void centerPolyline() async {
@@ -119,6 +133,7 @@ class RenterViewModel extends BaseModel {
       icon: BitmapDescriptor.fromBytes(SameData.imageData!),
       position: LatLng(newLoc.latitude, newLoc.longitude),
       anchor: const Offset(0.5, 0.5), // Extra....
+
       ripple: false,
     );
     notifyListeners();
@@ -145,7 +160,6 @@ class RenterViewModel extends BaseModel {
   }
 
   int isOnSegment(MyLatLng newLocation) {
-    debugPrint('Is On Segment...');
     var markerInd = 0;
     for (var i = 0; i < polylineCoordinate.length; i++) {
       int index;

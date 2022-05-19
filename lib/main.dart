@@ -3,13 +3,13 @@ import 'dart:typed_data';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:freelancer_tracking/features/freelancer_on_route/model/freelancer_route.dart';
 import 'package:freelancer_tracking/features/freelancer_on_route/viewmodels/renter_viewmodel.dart';
 import 'dart:ui' as ui;
 import 'package:provider/provider.dart';
 import 'package:wakelock/wakelock.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'config/string.dart';
+import 'features/freelancer_on_route/model/freelancer_route.dart';
 import 'features/freelancer_on_route/model/mylatlng.dart';
 import 'features/freelancer_on_route/screens/freelancer_map_screen.dart';
 import 'features/freelancer_on_route/screens/renter_map_screen.dart';
@@ -53,7 +53,7 @@ void main() async {
   //       ),
   //       home: const FreelancerAppWithFirebase()),
   // ));
-  /////// Renter ///////////////
+  ///// Renter ///////////////
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => RenterViewModel()),

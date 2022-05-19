@@ -37,6 +37,7 @@ class FreelancerViewModel extends BaseModel {
   Map<PolylineId, Polyline> polylines = {};
   final Completer<GoogleMapController> controller = Completer();
   bool show = false;
+  int count = 0;
 
   Future<void> updateLocationInFirebase() async {
     await FirebasePaths.freelancerOnRouteD.set(freelancerOnRoute.toMap());
@@ -56,7 +57,7 @@ class FreelancerViewModel extends BaseModel {
       freelancerOnRoute.isroutechanged = false;
       updateMarker(currentLocation);
       speedInMps = p.speed;
-      updateLocationInFirebase();
+
       var distance = mp.SphericalUtil.computeDistanceBetween(
           mp.LatLng(currentLocation.latitude, currentLocation.longitude),
           mp.LatLng(
@@ -69,6 +70,7 @@ class FreelancerViewModel extends BaseModel {
       updateSpeed(speedInMps);
       var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
       if (isLocationPath) {
+        updateLocationInFirebase();
         updateStatusFreelancer('App Freelancer $isLocationOnPath');
         markerIndex = isOnSegment(currentLocation);
         if (markerIndex > 0) {
@@ -338,5 +340,296 @@ class FreelancerViewModel extends BaseModel {
       ),
     );
     await service.startService();
+  }
+
+  void changeLocation() {
+    if (count == 0) {
+      currentLocation = MyLatLng(33.649564, 73.041836);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 1) {
+      currentLocation = MyLatLng(33.649105, 73.040997);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 2) {
+      currentLocation = MyLatLng(33.648645, 73.041295);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 3) {
+      currentLocation = MyLatLng(33.648350, 73.040802);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 4) {
+      currentLocation = MyLatLng(33.648154, 73.040383);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 5) {
+      currentLocation = MyLatLng(33.647877, 73.039815);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 6) {
+      currentLocation = MyLatLng(33.648315, 73.039475);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 7) {
+      currentLocation = MyLatLng(33.648650, 73.040065);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 8) {
+      currentLocation = MyLatLng(33.648825, 73.040394);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 9) {
+      currentLocation = MyLatLng(33.648948, 73.040632);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 10) {
+      currentLocation = MyLatLng(33.649064, 73.040880);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 11) {
+      currentLocation = MyLatLng(33.649351, 73.041405);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    } else if (count == 12) {
+      currentLocation = MyLatLng(33.649711, 73.042111);
+      var isLocationPath = checkLocationIsOnPathOrNot(currentLocation);
+      freelancerOnRoute.currentLocation = currentLocation;
+      freelancerOnRoute.isroutechanged = false;
+      if (isLocationPath) {
+        debugPrint('Location On Path');
+        updateLocationInFirebase();
+        markerIndex = isOnSegment(currentLocation);
+        if (markerIndex > 0) {
+          final polylineCoordinates = MyLatLng(
+              polylineCoordinate[1].latitude, polylineCoordinate[1].longitude);
+          updateMarker(polylineCoordinates);
+        } else {
+          updateMarker(currentLocation);
+        }
+      } else {
+        debugPrint('************Location Not on Path*************');
+        updateMarker(currentLocation);
+        setPolylines();
+      }
+      count++;
+    }
+    notifyListeners();
   }
 }

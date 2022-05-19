@@ -42,8 +42,8 @@
 	</array>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-  		<string>https</string>
-  		<string>http</string>
+		<string>https</string>
+		<string>http</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
